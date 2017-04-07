@@ -23,14 +23,13 @@ const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return [
-        ...state,
-        todo(undefined, action)
+        todo(undefined, action),
+        ...state
       ]
     case 'DELETE_TODO':
       let deletedIndex = state.findIndex((item) => item.id === action.id);
-      return [
-        ...state.slice(0, deletedIndex)
-      ]
+      state.splice(deletedIndex, 1)
+      return [...state];
     case 'EDIT_TODO':
       let editIndex = state.findIndex((item) => item.id === action.newTodo.id);
       if (editIndex >= 0) {
